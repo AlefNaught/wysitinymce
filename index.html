@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script type="text/javascript" src="js/tinymce/tinymce.js"></script>
+
+
+
+
+    <script type="text/javascript">
+        tinymce.init({
+            selector: "div.editable", 
+            inline: true,
+             theme: "modern",
+            plugins: ['advlist code colorpicker contextmenu directionality emoticons fullscreen hr image imagetools importcss insertdatetime layer link lists media pagebreak preview print save media '],
+             file_picker_callback: function (callback, value, meta) { //initalizes the premade tinymce filepicker arguments
+             fileBrowse(callback, value, meta);
+         }
+     });
+    </script>
+    <!-- Strange I have to initalize tinymce twice, perhaps because it is using two different editors? -->
+</head>
+<body>
+
+</script>
+
+<div class="editable" id="editArea">
+
+</div>
+
+<div class="editable" style="width:100%; height:550px">
+<h1 class="editable">Header Click Me! Once finished, click out!</h1>
+In a little while you will be alone in shoreless space, to wander its limitless solitudes without friend or comrade forever—for you will remain a thought, the only existent thought, and by your nature inextinguishable, indestructible. 
+</div>
+
+<script type="text/javascript">
+//http://www.tinymce.com/wiki.php/Configuration:file_picker_callback
+
+/* 
+Current issue, the server isn't allowing the file browser to access it, despite being hosted on the server itself.
+
+Looking into solutions.
+http://www.tinymce.com/forum/viewtopic.php?id=22532
+http://twiki.org/cgi-bin/view/Support/SID-00874
+
+*/ 
+function fileBrowse(callback, value, meta) {
+    tinymce.activeEditor.windowManager.open({ //open tinyMCE window
+        title: 'Image File Manager', //title of the file
+        url: 'downloads/1?type=' + meta.filetype, //URL of where to upload
+        width: 450, //width
+        height: 450, //heigth
+    }, {
+        oninsert: function (url) {
+             callback(url); // callback filepicker from tinymce init
+        }
+    });
+}
+
+</script>
+
+
+</script>
+
+
+</body>
+</html>
